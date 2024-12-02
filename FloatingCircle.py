@@ -33,5 +33,5 @@ class FloatingCircumference:
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
 # Run the program with a desired radius and color
-floating_circumference = FloatingCircumference(radius=100, color="blu", thickness=4)
+floating_circumference = FloatingCircumference(radius=100, color="blue", thickness=4)
 floating_circumference.run()
