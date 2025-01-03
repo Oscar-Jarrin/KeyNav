@@ -1,8 +1,9 @@
-Key Polar Navigation is a program that allows you to use your keyboard to replace your mouse movements 
-based on the idea of a polar plane projected on the screen that can allow you to specify the point of the screen
-you want to move your cursor to.
+KeyNav is a concieved to allow you to fluently use your computer only using your keyboard.
 
-It also allows you to simulate some of the commands you would use in vim's insert mode and normal mode to have a 
-similar navigation experience throughout your whole device and not only in your IDE.
+This is achieved by switching your keyboard between modes (you can also see it as layers) and each layer
+has a set of functionalities like moving your cursor arround the screen, navigate through text, or, 
+if you happen to need it, you have a mode to use your keyboard as if KeyNav wasn't running.
 
-You can see the kpn_documentation.pdf for more information
+Hope you find it useful.
+Obi.
+
