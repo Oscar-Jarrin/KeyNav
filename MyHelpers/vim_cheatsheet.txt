@@ -1,0 +1,92 @@
+normal mode:
+
+   what to do (delete, change...)
+      /
+     /      how many times
+    /         /
+   v         v
+{operator}{count}{motion}
+                    ^
+                   /
+                  /
+           where to perform
+             the action
+
+u - undo
+ctrl + r - redo
+dw - delete word
+dd - delte a complete line of code
+d - delete everything after the cursor
+t - till (until)
+gg - beggining of the file
+/something - search something afer the cursor
+?something - search something before the cursor 
+c {w/$/0} - change something (automatically enters insert mode)
+cc - change whole line 
+gn == (havin)
+text objects
+" - quotes 
+w - word
+s - sentence
+p - paragraph
+{having searched something with / or ?} gn == nvw - selects the next occurence of the searched pattern
+
+{command}{i-inside|a-around}{text objects}
+i- doesn´t include the text objects,                  
+a- does include the text objects 
+
+gi - go to the last place where you left the insert mode 
+_______________________________________________________________________________________
+y - yank(ctrl + v)
+p - paste(ctrl + c)
+note: the p command pastes the content on the right of the cursor, so if you paste at the end of a line, 
+it will be pasted on the next one, and if you xp a char/line you will swap it with the right char/line
+
+~ - switch the casing of a single char
+g~ - switch casing and move the cursor one to the right
+gu + l - switch to upper case
+gu + l - switch to lower case   
+> + l - add indentation
+< + l - remove indentation
+
+x == dl - delete de char under the cursor
+x == dh - delete the char on the left of the cursor 
+s == xi == ch == cl - replace the char under the cursor and change into insert mode
+r - lets you interchange a char for another 
+________________________________________________________________________________________
+visual mode: 
+
+
+get into visual mode
+    /
+   /                  action to apply
+  /                         /
+---------                  /
+{v|v|c-v}{count}{motion}{operator}
+         ---------------
+           /
+          /
+   bit of text over which
+   to apply an action
+
+_______________________________________________________________________________________
+Copying and inserting elements:
+gp - pastes the content from the clipboard and moves the cursor to the next line?
+gP - pastes the content from the clipboard and creates a new line
+
+- The behavior of `p` and `P` depends on what you've copied with the `y` command:
+  -if you copied characters:
+    - if you press p: you will paste it after the cursor and the cursor will move to the first char of what you pasted
+    - if you press P: you will paste it before the cursor and the cursor will move to the last char of what you pasted
+    - if you press gp: you will paste it after the cursor and the cursor will move to the nex char after the last char of the thing you pasted
+    - if you press gP: you will paste it before the cursor and the cursor will stay where it was
+  - If you copied lines like with yy:
+    - if you press p: you will paste it in the line below and the cursor will move to the first char of what you pasted 
+    - if you press P: you will paste it in the line bellow and the cursor will move to the first char of the line you were at
+    - if you press gp: you will paste it in the line below and the cursor will move to the first char of the line next to the line you pasted
+    - if you press gP: you will paste it in the line avobe and the cursor will move to the first char of the line you were aleady at 
+- You can copy or duplicate entire lines by using `yyp`
+
+
+
+
