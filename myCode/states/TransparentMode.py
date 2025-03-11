@@ -1,12 +1,9 @@
-import processingLogic.KeyNav as KeyNav
 from configparser import ConfigParser
-from .State import State
 import os
 
-class TransparentMode(State):
-    def __init__(self, context: KeyNav):
-        print("im in transparentMode")
-        self.context = context
+class TransparentMode():
+    def __init__(self):
+        #print("im in transparentMode")
         #create the path for the config file with os
         currentDirectory = os.getcwd()
         configFilePath = os.path.join(currentDirectory, "myCode", "configFiles", "transparent_mode_config.ini")
