@@ -1,5 +1,3 @@
-from configparser import ConfigParser
-from graphics.GUI import GUI
 from pynput.keyboard import Key, KeyCode 
 
 class KeysToStrParser: 

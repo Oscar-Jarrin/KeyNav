@@ -1,3 +1,6 @@
 pynput
-threading.Event
+threading
 PyQt5
+mouse
+tkinter
+configparser
