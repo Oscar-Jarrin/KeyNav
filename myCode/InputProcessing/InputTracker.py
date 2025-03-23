@@ -19,7 +19,7 @@ class InputTracker:
             Key.caps_lock,
         }
         self.keysToStr = KeysToStrParser()
-        self.supressKeys = False
+        self.supressKeys = True
         self.listener = self.__createListener()
 
     def __createListener(self): 

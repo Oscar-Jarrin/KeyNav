@@ -2,10 +2,24 @@ from configparser import ConfigParser
 import math
 import os
 from hardwareSimulators.MouseManager import MouseManager
+import sys
+
+from graphics.DivisorLinesDrawer import DivisorLinesDrawer
+from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtGui import QPainter, QPen
+from PyQt5.QtCore import Qt
 
 class MouseSimulator:
-    def __init__(self, context):
+    def __init__(self, context, gui):
+        #KeyNav, the context of the state pattern
         self.context = context
+
+        #the good and old gui
+        self.gui = gui
+
+        #the QApp for the gui
+        self.app = QApplication(sys.argv)
+        #to controll the mouse
         self.mouse = MouseManager()
 
         #create the path for the config file with os
@@ -15,14 +29,15 @@ class MouseSimulator:
         self.config.read(configFilePath)
         self.mouseInstructionsSection = "mouse_instructions"
         self.controlInstructionSection = "control_instructions"
+        
 
         self.rightClickPressed = False
         self.middleClickPressed = False
         self.leftClickPressed = False
         self.activeZones = set()
 
-        self.accelerationFactor = 1.15
-        self.decelerationFactor = 0.35
+        self.accelerationFactor = 1.05
+        self.decelerationFactor = 0.3
 
         self.MIN_CURSOR_SPEED = 2
         self.MAX_CURSOR_SPEED = 25
@@ -30,7 +45,7 @@ class MouseSimulator:
         self.activeCursorOrientations = set()
         self.lastCursorOrientation = (0,0)
 
-        self.MIN_SCROLL_SPEED = 0.1
+        self.MIN_SCROLL_SPEED = 0.05
         self.MAX_SCROLL_SPEED = 9
         self.scrollSpeed = self.MIN_SCROLL_SPEED
         self.activeScrollOrientations = set()
@@ -222,6 +237,8 @@ class MouseSimulator:
         self.__moveCursotToSection((2,2))
     def resetCursorPosition(self):
         self.mouse.resetMousePosition()
+        #TODO solve a way to draw the grid and still be able to quickly move the cursor
+        self._drawZonesIndicatorLines()
     def __moveCursotToSection(self, zoneCoordinates):
         print(f"the coordinate {zoneCoordinates} is in self.activeZones: {zoneCoordinates in self.activeZones}")
         if zoneCoordinates not in self.activeZones:
@@ -250,7 +267,6 @@ class MouseSimulator:
             self.resetClicks()
     def resetClicks(self):
         self.mouse.resetAllClicks()
-        print("I reseted all clicks")
 
     #swap clicks
     def swapLeftClick(self):
@@ -269,3 +285,7 @@ class MouseSimulator:
     #control instruction
     def __contextToTransparentMode(self):
         self.context.setToTransparentMode()
+    
+    #gui notification
+    def _drawZonesIndicatorLines(self):
+        self.gui.drawSeparatorLines()

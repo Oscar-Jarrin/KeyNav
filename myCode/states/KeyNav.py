@@ -1,14 +1,16 @@
 import time
+from graphics.GUI import GUI
 from InputProcessing.InputTracker import InputTracker
 from states.MouseState import MouseSimulator
 from states.TransparentState import TransparentMode
 
 class KeyNav():
     def __init__(self):
-        self.mouseState = MouseSimulator(self)
-        self.transparentState = TransparentMode(self)
+        self.gui = GUI()
+        self.mouseState = MouseSimulator(self, self.gui)
+        self.transparentState = TransparentMode(self, self.gui)
         self.inputTracker = InputTracker()
-        self.currentState = self.transparentState
+        self.currentState = self.mouseState
         self.__startSimulation()
         self.running = True
     #maybe locate the inputTracker and the while loop here
@@ -26,6 +28,7 @@ class KeyNav():
         self.inputTracker.setKeyboardSupression(False)
         self.running = True
         self.__startSimulation()
+        print("context set to transparent mode")
 
     def setToMouseMode(self):
         self.running = False
@@ -33,3 +36,4 @@ class KeyNav():
         self.inputTracker.setKeyboardSupression(True)
         self.running = True
         self.__startSimulation()
+        print("context set to mouse mode")

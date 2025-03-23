@@ -46,3 +46,6 @@ class MouseManager:
             mouse.release("right")
         if mouse.is_pressed("middle"):
             mouse.release("middle")
+    
+    def getZonesManager(self):
+        return self.sectionsManager

@@ -2,8 +2,13 @@ from configparser import ConfigParser
 import os
 
 class TransparentMode:
-    def __init__(self, context):
+    def __init__(self, context, gui):
+        #KeyNav, the context class of the state pattern
         self.context = context
+
+        #the good and old gui
+        self.gui = gui
+
         #create the path for the config file with os
         currentDirectory = os.getcwd()
         configFilePath = os.path.join(currentDirectory, "myCode", "configFiles", "config_file.ini")
