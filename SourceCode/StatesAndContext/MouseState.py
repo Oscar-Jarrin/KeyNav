@@ -124,10 +124,9 @@ class MouseSimulator:
         #teclas fantasma
         self.activeCursorOrientations.clear()
         self.activeScrollOrientations.clear()
-
     
     def simulateOn(self, keySequence: str):
-        print(f"the str of the key sequence recieved by the Mouse Simulator is: {keySequence}")
+        #print(f"the str of the key sequence recieved by the Mouse Simulator is: {keySequence}")
         instructionToExecute = None
         if keySequence in self.config[self.controlInstructionSection]:
             instructionToExecute = self.config[self.controlInstructionSection][keySequence]
@@ -310,3 +309,4 @@ class MouseSimulator:
     #gui notification
     def _drawZonesIndicatorLines(self):
         self.gui.drawSeparatorLines()
+    

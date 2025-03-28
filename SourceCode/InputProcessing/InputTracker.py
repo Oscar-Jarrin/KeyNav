@@ -1,4 +1,4 @@
-import pynput
+from pynput.keyboard import Controller, Key  
 import keyboard
 import time
 from pynput.keyboard import Listener, Key, Controller
@@ -20,8 +20,9 @@ class InputTracker:
             Key.shift_r,
             Key.caps_lock,
         }
+        
         self.keysToStr = KeysToStrParser()
-        self.supressKeys = True
+        self.supressKeys = False
         self.listener = self.__createListener()
         self.keyboardController = Controller()
             
