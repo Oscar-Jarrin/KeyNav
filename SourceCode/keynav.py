@@ -1,5 +1,5 @@
-from threading import Event
 from StatesAndContext.KeyNav import KeyNav
-print("hi im in keynav")
+print("Happy typing :)")
+print("make sure you run this program as administrator, if you didn't:")
+print("I would recommend reading the README file next to the keynav.dist folder")
 kn = KeyNav()
-Event.wait()

@@ -26,27 +26,28 @@ class DivisorLinesDrawer(QWidget):
         self.secondaryGridLines = self.generateSecondaryGridLines()
 
         # Shrinking parameters
-        self.mainLineWidth = 20
+        self.mainLineWidth = 30
         self.secondaryLineWidth = 15
-        self.shrink_rate = 1  # Shrinking speed
+        self.secondaryLinesShrinkRate = 1
+        self.mainLinesShrinkRate = 2  # Shrinking speed
         self.minLineWidth = 0  # Stop shrinking at this width
         
         # QTimer to repaint the lines and simulate the shrinking 
         self.timer = QTimer()
         self.timer.timeout.connect(self.shrinkLines)
-        self.timer.start(20)
+        self.timer.start(15)
 
         # First events for showing the screen
         self.show()
         #self.update()
         #QApplication.processEvents()
-        print("I finihed building the Drawer")
+        #print("I finihed building the Drawer")
 
     def shrinkLines(self):
-        print("I am in shrinkLines")
+        #print("I am in shrinkLines")
         if self.mainLineWidth > self.minLineWidth or self.secondaryLineWidth > self.minLineWidth:
-            self.mainLineWidth = max(self.mainLineWidth - self.shrink_rate, self.minLineWidth)
-            self.secondaryLineWidth = max(self.secondaryLineWidth - self.shrink_rate, self.minLineWidth)
+            self.mainLineWidth = max(self.mainLineWidth - self.mainLinesShrinkRate, self.minLineWidth)
+            self.secondaryLineWidth = max(self.secondaryLineWidth - self.secondaryLinesShrinkRate, self.minLineWidth)
             self.update()
         else:
             self.timer.stop()
@@ -137,6 +138,6 @@ class DivisorLinesDrawer(QWidget):
         grayscale_img = img.convert("L")  # Convert to grayscale
         brightness = np.array(grayscale_img).mean()  # Compute average brightness
         
-        print(f"Screen brightness: {brightness}")  # Debugging
+        #print(f"Screen brightness: {brightness}")  # Debugging
         
         return brightness > 128  # If brightness is high, use dark lines

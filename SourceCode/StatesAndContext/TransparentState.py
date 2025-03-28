@@ -21,22 +21,20 @@ class TransparentMode:
         #self.config.read(configFilePath)
 
         #this is the gpt way of calling the config file
-        # Determine base directory, whether running as script or exe
-        if getattr(sys, 'frozen', False):
-            # Running as an executable (PyInstaller or Nuitka)
-            baseDirectory = os.path.dirname(os.path.abspath(sys.executable))
-        else:
-            # Running as a normal Python script
+        #this is the gpt way of calling the config file
+        if getattr(sys, 'frozen', False):  # Running as EXE
+            baseDirectory = os.path.dirname(sys.executable)  # Path inside keynav.dist
+        else:  # Running as a Python script
             baseDirectory = os.path.dirname(os.path.abspath(__file__))
+            baseDirectory = os.path.dirname(baseDirectory)
 
-        # Move one level up to reach "SourceCode"
-        sourceCodeDirectory = os.path.dirname(baseDirectory)
+        exedir = os.path.dirname(sys.executable)
+        #print(f"IF I WERE IN .EXE, the route would be {os.path.join(exedir, "configFiles", "config_file.ini")}")
 
         # Construct the correct path to config_file.ini
-        configFilePath = os.path.abspath(os.path.join(sourceCodeDirectory, "configFiles", "config_file.ini"))
+        configFilePath = os.path.join(baseDirectory, "configFiles", "config_file.ini")
 
-        print(f"In MouseState, the route for config_file is {configFilePath}")
-
+        #print(f"In TransparentState, the route for config_file is {configFilePath}")
         # Read the config file
         self.config = ConfigParser()
         self.config.read(configFilePath)  

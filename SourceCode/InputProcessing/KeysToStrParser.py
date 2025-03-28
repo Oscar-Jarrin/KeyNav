@@ -2,7 +2,8 @@ from pynput.keyboard import Key, KeyCode
 
 class KeysToStrParser: 
     def __init__(self):
-        print("im in the KeysToStrParser builder")
+        #print("im in the KeysToStrParser builder")
+        pass
 
     def formatSequence(self, keySequence: list):
         if not keySequence: #means if the list is empty

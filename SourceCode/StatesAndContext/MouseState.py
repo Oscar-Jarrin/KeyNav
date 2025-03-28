@@ -3,7 +3,6 @@ import math
 import os
 from hardwareSimulators.MouseManager import MouseManager
 import sys
-
 from PyQt5.QtWidgets import QApplication
 
 class MouseSimulator:
@@ -26,27 +25,24 @@ class MouseSimulator:
         #sourceCodeDirectory = os.path.dirname(currentDirectory)
         ## Construct the correct path to config_file.ini
         #configFilePath = os.path.join(sourceCodeDirectory, "configFiles", "config_file.ini")
-        #print(f"In mouse state, the route for the config_file is {configFilePath}")
+        ##print(f"In mouse state, the route for the config_file is {configFilePath}")
         #self.config = ConfigParser()
         #self.config.read(configFilePath)
 
         #this is the gpt way of calling the config file
-        # Determine base directory, whether running as script or exe
-        if getattr(sys, 'frozen', False):
-            # Running as an executable (PyInstaller or Nuitka)
-            baseDirectory = os.path.dirname(os.path.abspath(sys.executable))
-        else:
-            # Running as a normal Python script
+        if getattr(sys, 'frozen', False):  # Running as EXE
+            baseDirectory = os.path.dirname(sys.executable)  # Path inside keynav.dist
+        else:  # Running as a Python script
             baseDirectory = os.path.dirname(os.path.abspath(__file__))
+            baseDirectory = os.path.dirname(baseDirectory)
 
-        # Move one level up to reach "SourceCode"
-        sourceCodeDirectory = os.path.dirname(baseDirectory)
-
+        exedir = os.path.dirname(sys.executable)
+        #print(f"IF I WERE IN .EXE, the route would be {os.path.join(exedir, "configFiles", "config_file.ini")}")
         # Construct the correct path to config_file.ini
-        configFilePath = os.path.abspath(os.path.join(sourceCodeDirectory, "configFiles", "config_file.ini"))
+        configFilePath = os.path.join(baseDirectory, "configFiles", "config_file.ini")
 
-        print(f"In MouseState, the route for config_file is {configFilePath}")
-
+        #print(f"In MouseState, the route for config_file is {configFilePath}")
+        #configFilePath ="C:\keyNavRoot\SourceCode\configFiles\config_file.ini"
         # Read the config file
         self.config = ConfigParser()
         self.config.read(configFilePath) 
@@ -60,18 +56,10 @@ class MouseSimulator:
         self.leftClickPressed = False
         self.activeZones = set()
 
-        self.accelerationFactor = 1.05
-        self.decelerationFactor = 0.3
-
-        self.MIN_CURSOR_SPEED = 2
-        self.MAX_CURSOR_SPEED = 25
-        self.cursorSpeed = self.MIN_CURSOR_SPEED
-        self.activeCursorOrientations = set()
-        self.lastCursorOrientation = (0,0)
-
-        self.MIN_SCROLL_SPEED = 0.05
-        self.MAX_SCROLL_SPEED = 9
+        self.MIN_SCROLL_SPEED = 0.2
+        self.MAX_SCROLL_SPEED = 10
         self.scrollSpeed = self.MIN_SCROLL_SPEED
+        self.scrollAccelerationFactor = 1.02
         self.activeScrollOrientations = set()
         self.lastScrollOrientation = (0,0)
         self.orientationVector = {
@@ -80,6 +68,14 @@ class MouseSimulator:
             "left":(-1, 0),
             "right":(1, 0),
         }
+        self.MIN_CURSOR_SPEED = 2
+        self.MAX_CURSOR_SPEED = 25
+        self.cursorSpeed = self.MIN_CURSOR_SPEED
+        self.cursorAccelerationFactor = 1.2
+        self.activeCursorOrientations = set()
+        self.lastCursorOrientation = (0,0)
+
+        self.decelerationFactor = 0.3
 
         self.strToFunctionMap = {
             "leftClick": self.leftClick,
@@ -129,6 +125,7 @@ class MouseSimulator:
         self.activeCursorOrientations.clear()
         self.activeScrollOrientations.clear()
 
+    
     def simulateOn(self, keySequence: str):
         print(f"the str of the key sequence recieved by the Mouse Simulator is: {keySequence}")
         instructionToExecute = None
@@ -138,33 +135,33 @@ class MouseSimulator:
             instructionToExecute = self.config[self.mouseInstructionsSection][keySequence]
         if instructionToExecute != None and instructionToExecute in self.strToFunctionMap:
             self.strToFunctionMap[instructionToExecute]()         
-            print(instructionToExecute)
+            #print(instructionToExecute)
 
     #cursor movement
     def cursorUp(self):
-        print("cursor up")
+        #print("cursor up")
         self.activeCursorOrientations.add("up")
         self.activeCursorOrientations.discard("down")
     def cursorDown(self):
-        print("cursor down")
+        #print("cursor down")
         self.activeCursorOrientations.add("down")
         self.activeCursorOrientations.discard("up")
     def cursorLeft(self):
-        print("cursor left")
+        #print("cursor left")
         self.activeCursorOrientations.add("left")
         self.activeCursorOrientations.discard("right")
     def cursorRight(self):
-        print("cursor right")
+        #print("cursor right")
         self.activeCursorOrientations.add("right")
         self.activeCursorOrientations.discard("left")
     def decelerateCursor(self):
         if self.activeCursorOrientations:
             self.activeCursorOrientations = set()
         if self.cursorSpeed > self.MIN_CURSOR_SPEED:  
-            print(f"I am decelerating at cursor speed {self.cursorSpeed}")
+            #print(f"I am decelerating at cursor speed {self.cursorSpeed}")
             dx, dy = self.lastCursorOrientation
-            dx *= self.accelerationFactor
-            dy *= self.accelerationFactor
+            dx *= self.cursorAccelerationFactor
+            dy *= self.cursorAccelerationFactor
             self.mouse.moveCursor(dx, dy)
             self.cursorSpeed = max(self.cursorSpeed*self.decelerationFactor, self.MIN_CURSOR_SPEED)
     def detectCursorMovement(self):
@@ -189,8 +186,8 @@ class MouseSimulator:
             #update last orientation vector (including the acceleration)
             self.lastCursorOrientation = (dx, dy)
             #increase speed
-            print(f"I am accelerating at cursor speed {self.cursorSpeed}")
-            self.cursorSpeed = min(self.cursorSpeed*self.accelerationFactor, self.MAX_CURSOR_SPEED)
+            #print(f"I am accelerating at cursor speed {self.cursorSpeed}")
+            self.cursorSpeed = min(self.cursorSpeed*self.cursorAccelerationFactor, self.MAX_CURSOR_SPEED)
 
     #scroll
     def scrollDown(self):
@@ -227,16 +224,16 @@ class MouseSimulator:
             #update last orientation vector (including the acceleration)
             self.lastScrollOrientation = (dx, dy)
             #increase speed
-            print(f"I am scrolling at speed {self.scrollSpeed}")
-            self.scrollSpeed = min(self.scrollSpeed*self.accelerationFactor, self.MAX_SCROLL_SPEED)
+            #print(f"I am scrolling at speed {self.scrollSpeed}")
+            self.scrollSpeed = min(self.scrollSpeed*self.scrollAccelerationFactor, self.MAX_SCROLL_SPEED)
     def decelerateScroll(self):
         if self.activeScrollOrientations:
             self.activeScrollOrientations = set()
         if self.scrollSpeed > self.MIN_SCROLL_SPEED:  
-            print(f"I am decelerating at cursor speed {self.scrollSpeed}")
+            #print(f"I am decelerating at cursor speed {self.scrollSpeed}")
             dx, dy = self.lastScrollOrientation
-            dx *= self.accelerationFactor
-            dy *= self.accelerationFactor
+            dx *= self.scrollAccelerationFactor
+            dy *= self.scrollAccelerationFactor
             self.mouse.scroll(dx, dy)
             self.scrollSpeed = max(self.scrollSpeed*self.decelerationFactor, self.MIN_SCROLL_SPEED)
     
@@ -264,7 +261,7 @@ class MouseSimulator:
         #TODO solve a way to draw the grid and still be able to quickly move the cursor
         self._drawZonesIndicatorLines()
     def __moveCursotToSection(self, zoneCoordinates):
-        print(f"the coordinate {zoneCoordinates} is in self.activeZones: {zoneCoordinates in self.activeZones}")
+        #print(f"the coordinate {zoneCoordinates} is in self.activeZones: {zoneCoordinates in self.activeZones}")
         if zoneCoordinates not in self.activeZones:
             self.activeZones.add(zoneCoordinates)
             coordX, coordY = zoneCoordinates
@@ -278,13 +275,13 @@ class MouseSimulator:
             self.leftClickPressed = True
             self.resetClicks()
     def rightClick(self):
-        print("i pressed right click")
+        #print("i pressed right click")
         if not self.rightClickPressed:
             self.mouse.click("right")
             self.rightClickPressed = True
             self.resetClicks()
     def middleClick(self):
-        print("i pressed the middle click")
+        #print("i pressed the middle click")
         if not self.middleClickPressed:
             self.mouse.click("middle")
             self.middleClickPressed = True

@@ -1,6 +1,8 @@
-from pynput.keyboard import Listener, Key
+import pynput
+import keyboard
+import time
+from pynput.keyboard import Listener, Key, Controller
 from InputProcessing.KeysToStrParser import KeysToStrParser
-
 class InputTracker:
     def __init__(self):
         self.modifiersPressed = set()
@@ -21,7 +23,8 @@ class InputTracker:
         self.keysToStr = KeysToStrParser()
         self.supressKeys = True
         self.listener = self.__createListener()
-
+        self.keyboardController = Controller()
+            
     def __createListener(self): 
         listener = Listener(on_press=self.handlePress, on_release=self.handleRelease, suppress = self.supressKeys)
         listener.start()            
@@ -30,13 +33,24 @@ class InputTracker:
     def setKeyboardSupression(self, newSupressKeysValue: bool):
         if newSupressKeysValue != self.supressKeys:
             self.supressKeys = newSupressKeysValue
+            self.__resetKeysPressed()
+            #print(f"im in keyboard supression: ")
+            #print(f"the list of modifiers pressed is {self.modifiersPressed}")
+            # Ensure all modifiers are manually released before restarting the listener
+            for modifier in self.modifiers:
+                try:
+                    #print(f"releasing {modifier}")
+                    self.keyboardController.release(modifier)
+                except:
+                    pass  # Ignore errors for keys not currently pressed
             if self.listener:
                 self.listener.stop()
                 self.listener.join()
-            self.__resetKeysPressed()
+            time.sleep(0.05)
             self.listener = self.__createListener()
 
     def handlePress(self, key):
+        #print(f"handling press of {key}")
         if key in self.modifiers:
             self.modifiersPressed.add(key)
         else:
@@ -50,8 +64,9 @@ class InputTracker:
             self.modifiersPressed.discard(key)
         elif key in self.keysPressed:
             self.keysPressed.discard(key)
-    
+
     def getCurrentKeySequences(self):
+    
         combinationsPressed = set() #set of str formatted combinations
         localCombination = None #the combination detected for every modifiers*key
         formattedCombination = None #the str version of the combination detected
