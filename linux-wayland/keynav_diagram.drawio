@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Page-1" id="ZxzHoVA9f0XfGfMmehhm">
-    <mxGraphModel dx="2119" dy="531" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2053" dy="1760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -11,10 +11,10 @@
           <mxGeometry height="60" width="120" x="470" y="479" as="geometry" />
         </mxCell>
         <mxCell id="8OXpusKTkHBQO879smEv-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Hw Simulator" vertex="1">
-          <mxGeometry height="60" width="120" x="680" y="740" as="geometry" />
+          <mxGeometry height="60" width="120" x="690" y="580" as="geometry" />
         </mxCell>
         <mxCell id="7jc1iiAAtIEpTuhBMgsY-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="GUI" vertex="1">
-          <mxGeometry height="60" width="120" x="680" y="560" as="geometry" />
+          <mxGeometry height="60" width="120" x="690" y="400" as="geometry" />
         </mxCell>
         <mxCell id="7jc1iiAAtIEpTuhBMgsY-2" edge="1" parent="1" source="8OXpusKTkHBQO879smEv-2" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="8OXpusKTkHBQO879smEv-3" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
@@ -35,9 +35,9 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="BWI9OO-LOAWzsL8Un-7o-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="InputListener" vertex="1">
-          <mxGeometry height="60" width="120" x="-70" y="480" as="geometry" />
+          <mxGeometry height="60" width="120" x="-230" y="480" as="geometry" />
         </mxCell>
-        <mxCell id="BWI9OO-LOAWzsL8Un-7o-3" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="">
+        <mxCell id="BWI9OO-LOAWzsL8Un-7o-3" edge="1" parent="1" source="BWI9OO-LOAWzsL8Un-7o-2" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
             <mxPoint x="50" y="510.5" as="sourcePoint" />
             <mxPoint x="200" y="509.5" as="targetPoint" />
@@ -49,7 +49,7 @@
         <mxCell id="BWI9OO-LOAWzsL8Un-7o-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Vim Type&amp;nbsp;&lt;div&gt;State&lt;/div&gt;" vertex="1">
           <mxGeometry height="60" width="120" x="200" y="610" as="geometry" />
         </mxCell>
-        <mxCell id="BWI9OO-LOAWzsL8Un-7o-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Normal&lt;div&gt;State&lt;/div&gt;" vertex="1">
+        <mxCell id="BWI9OO-LOAWzsL8Un-7o-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Transparent&lt;br&gt;&lt;div&gt;State&lt;/div&gt;" vertex="1">
           <mxGeometry height="60" width="120" x="350" y="610" as="geometry" />
         </mxCell>
         <mxCell id="BWI9OO-LOAWzsL8Un-7o-11" edge="1" parent="1" source="8OXpusKTkHBQO879smEv-2" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" target="BWI9OO-LOAWzsL8Un-7o-7" value="">
@@ -71,7 +71,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="BWI9OO-LOAWzsL8Un-7o-14" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;GUI&lt;/h1&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="120" width="180" x="930" y="340" as="geometry" />
+          <mxGeometry height="120" width="180" x="1790" y="630" as="geometry" />
         </mxCell>
         <mxCell id="BWI9OO-LOAWzsL8Un-7o-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Config file" vertex="1">
           <mxGeometry height="60" width="120" x="200" y="760" as="geometry" />
@@ -87,6 +87,33 @@
         </mxCell>
         <mxCell id="BWI9OO-LOAWzsL8Un-7o-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Config Interface" vertex="1">
           <mxGeometry height="60" width="120" x="200" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="mhinIYfKRZyUOLAsjX1K-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="Responsabilities:&lt;div&gt;- Kidnap physical keyboard events&lt;/div&gt;&lt;div&gt;- send those events to the keynavState module to process&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="310" x="-280" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="mhinIYfKRZyUOLAsjX1K-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Transparent State" vertex="1">
+          <mxGeometry height="60" width="120" x="1320" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="mhinIYfKRZyUOLAsjX1K-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Mouse State" vertex="1">
+          <mxGeometry height="60" width="120" x="1590" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="mhinIYfKRZyUOLAsjX1K-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Vim State" vertex="1">
+          <mxGeometry height="60" width="120" x="1460" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="mhinIYfKRZyUOLAsjX1K-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Control" vertex="1">
+          <mxGeometry height="60" width="120" x="1540" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="mhinIYfKRZyUOLAsjX1K-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Select" vertex="1">
+          <mxGeometry height="60" width="120" x="1370" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="mhinIYfKRZyUOLAsjX1K-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="BIND: CHAIN | SEQUENCE&amp;nbsp;&lt;div&gt;&lt;br&gt;CHAIN: sequence of keys presed (and not released) as if it was some sort of graph or contextual menu&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;SEQUENCE: sequence of keys pressed and released&lt;/div&gt;&lt;div&gt;personal note: i believe this can be implemented with a stack with defined size, the last clicked key can be clicked again to pop it, and esc can be clicked to restart the sequence&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="310" x="105" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="mhinIYfKRZyUOLAsjX1K-12" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="Responsabilities:&lt;div&gt;- recieve press, held and release keys events and maintains the binds in course&lt;/div&gt;&lt;div&gt;- with every modification to such binds, and with the commands loaded in the current state {mouse, vim, transparent}, it can consult each state if it has it, it can consult the corresponding event and throw it in the bus&lt;span style=&quot;background-color: transparent; white-space: nowrap; color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px;&quot;&gt;%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20parent%3D%221%22%20style%3D%22text%3Bhtml%3D1%3BwhiteSpace%3Dwrap%3Boverflow%3Dhidden%3Brounded%3D0%3B%22%20value%3D%22%26lt%3Bh1%20style%3D%26quot%3Bmargin-top%3A%200px%3B%26quot%3B%26gt%3BGUI%26lt%3B%2Fh1%26gt%3B%26lt%3Bdiv%26gt%3B%26lt%3Bbr%26gt%3B%26lt%3B%2Fdiv%26gt%3B%22%20vertex%3D%221%22%3E%3CmxGeometry%20height%3D%22120%22%20width%3D%22180%22%20x%3D%221130%22%20y%3D%22420%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;span style=&quot;background-color: transparent; white-space: nowrap; color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20parent%3D%221%22%20style%3D%22text%3Bhtml%3D1%3BwhiteSpace%3Dwrap%3Boverflow%3Dhidden%3Brounded%3D0%3B%22%20value%3D%22%26lt%3Bh1%20style%3D%26quot%3Bmargin-top%3A%200px%3B%26quot%3B%26gt%3BGUI%26lt%3B%2Fh1%26gt%3B%26lt%3Bdiv%26gt%3B%26lt%3Bbr%26gt%3B%26lt%3B%2Fdiv%26gt%3B%22%20vertex%3D%221%22%3E%3CmxGeometry%20height%3D%22120%22%20width%3D%22180%22%20x%3D%221130%22%20y%3D%22420%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxG&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; white-space: nowrap; color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="310" x="105" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="mhinIYfKRZyUOLAsjX1K-13" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="Responsabilities:&lt;div&gt;- load the configuration for every action, and create binds&lt;/div&gt;&lt;div&gt;- respond to the request, contains (bind) and get&lt;br&gt;Effect (bind)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="270" x="-140" y="740" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

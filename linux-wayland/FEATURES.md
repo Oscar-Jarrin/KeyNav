@@ -93,6 +93,7 @@
 
 # Vim Select State Grammar
 TEXT_BLOCK = {number} + TextBlock
+
 ACTION = TEXT_BLOCK | yank
 
 **TextBlock**
@@ -104,7 +105,9 @@ ACTION = TEXT_BLOCK | yank
 
 # Vim Controsl State Grammar
 TEXT_BLOCK = {number} + TextBlock
+
 VERB = {count} + terminalVerb
+
 ACTION = {VERB} + TEXT_BLOCK
 
 **TextBlock**
