@@ -1,35 +1,34 @@
 # KeyNav - Linux Keyboard-to-Mouse Navigation
 
 # Across all modes Functionalities
-- Peak at other modes modes
-> maybe with the super Key
-
 - Switch to all the different modes
+- Peek at other modes modes
+> maybe with the ctrl+SuperKey so it doesn't collide with any bind from the modes
 
-# Transparent State Functions
+# Transparent/Insert State Functions
 > Across all modes Functionalities
-
+> As this will simulate the functionalities of the **insert mode**, this should also have
+- delete a char ctrl+h
+- delete a word ctrl+w
 - (Passive) Replicate all the keys pressed
 > this mode sends the exact keyboard events it receives
 
 # Mouse State Functions
 > Across all modes Functionalities
-
 - Mouse Clicks functionalities
   - **Modifier Keys** can be combined with clicks, for different application-specific needs
   > therefore the Modifier Keys cannot belong to a bind for any click
 
-  - for each mouse button : (left, right, middle)
+  - for each mouse button: (left, right, middle)
     - Basic click
     - Click and hold
     - Unclick/Release
-    - Click DRAG Drop
-    > DRAG: cursor Mobility Functionalities
+    > the drag and drop is achieved by combining a <click and hold> with <mouse movement> of some sort
 
 - Cursor Mobility Functionalities
   - Zones Mobility
     - Dive into zone (x, y) | {x, y e 3x3 grid}
-    - Arise to zone (x, y) | {x, y e 3x3 grid}
+    - Arise to previous zone 
     - Reset to full-screen zone
   
   - Detailed Mobility
@@ -40,14 +39,14 @@
   - Deafult spots
     - be able to create binds (not belonging to existing commands) to a certain spot
 
-- Scroll functionalities (chain of commands)
+- Scroll functionalities
   - Scroll vertically/horizontally
   - Increase scroll speed
   - Decrease scroll speed
 
-# Vim Type State Functionalities
+# Vim-ish State Functionalities
 > Initially, I believed that this would be like a transparent mode, that allows you to use binds like Alt+<keyBind> for certain actions
-> But the magnitude of actions that one can do while managing text, demands a mode of its own.
+> But the magnitude of actions that one can do while managing text (control mode), demands a mode of its own.
 > In this model, the insert mode there's in vim, can be simulated here by using the transparent mode. 
 
   - Delete a word forwards d+w
@@ -93,24 +92,31 @@
 
 # Vim Select State Grammar
 TEXT_BLOCK = {number} + TextBlock
+VERB = terminalVerb
+ACTION = TEXT_BLOCK | VERB
+> Right when the select mode is activated, the current char is selected, so you can just execute a verb right after entering
 
-ACTION = TEXT_BLOCK | yank
+**Verbs**
+  - terminal
+    - delete
+    - yank
+    - substitute (delete and move to transparent/insert mode)
 
-**TextBlock**
+**TextBlock (same on both)**
   - word
   - begin of word (backwards)
   - end of word (forwards)
   - direction (all 4 directions)
   - go (start/end of line)
 
-# Vim Controsl State Grammar
+# Vim Control State Grammar
 TEXT_BLOCK = {number} + TextBlock
 
 VERB = {count} + terminalVerb
 
 ACTION = {VERB} + TEXT_BLOCK
 
-**TextBlock**
+**TextBlock (same on both)**
   - word
   - begin of word (backwards)
   - end of word (forwards)
@@ -123,6 +129,7 @@ ACTION = {VERB} + TEXT_BLOCK
     - yank
 
   - terminal
+    - substitute (delete and move to transparent/insert mode)
     - create line
     - paste (in after place)
     - activate/deactivate selection

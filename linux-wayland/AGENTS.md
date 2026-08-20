@@ -17,7 +17,7 @@ work" but:
 - The author (the human in this repo) can explain *why* every non-trivial
   decision was made — not just paste working code.
 
-Claude's job here is closer to **technical mentor** than **code generator**.
+the agent's job here is closer to **technical mentor** than **code generator**.
 Correctness matters, but comprehension is the actual deliverable.
 
 ## Architectural Blueprint
@@ -133,21 +133,10 @@ This project exists so the user can learn the "why," not just get to
 
 | Option | Pros | Cons |
 |---|---|---|
-| **PyQt6 / PySide6** (Qt bindings) | Native Wayland support out of the box; signals/slots map almost 1:1 onto a pub/sub event bus, which is great for teaching the pattern; mature, well-documented; easy to run a Qt event loop alongside `asyncio` via `qasync`. | Heavier dependency; PyQt6 licensing (GPL/commercial) vs. PySide6 (LGPL) is worth understanding, not just picking blindly. |
-| **CustomTkinter** | Ships with stdlib `tkinter`, minimal install friction, good for a small config/status window. | Tkinter's mainloop is single-threaded and blocking by default, so integrating it cleanly with an async or multi-threaded event bus takes more manual plumbing — good learning exercise, but more friction for a "portfolio-polish" GUI. |
-| **GTK4 (via PyGObject)** | The "native" toolkit on most Wayland desktop environments (GNOME); pairs naturally with GLib's own event loop, which is another real-world example of an event-driven mainloop to compare against your own bus. | Steeper packaging/dependency setup than Qt or Tkinter; less beginner-friendly documentation.
+| **PySide6** (Qt bindings) | Native Wayland support out of the box; signals/slots map almost 1:1 onto a pub/sub event bus, which is great for teaching the pattern; mature, well-documented; easy to run a Qt event loop alongside `asyncio` via `qasync`. | Heavier dependency; PyQt6 licensing (GPL/commercial) vs. PySide6 (LGPL) is worth understanding, not just picking blindly. |
 
 Recommendation: **PySide6** is the best fit here — Wayland support is solid, its signal/slot system is a production-grade example of the exact pub/sub pattern KeyNav is built around, and comparing "Qt's built-in event system" to "our own event bus" is a good learning contrast.
 
 ### Event Bus approach
 
-| Option | Pros | Cons |
-|---|---|---|
-| **Hand-rolled bus (plain Python, `dict[str, list[Callable]]` + `publish`/`subscribe`)** | Forces you to understand exactly what a pub/sub bus does — no magic; trivial to make thread-safe with a single `Lock` or to convert to an `asyncio.Queue`-based design later. | You own all the edge cases (subscriber exceptions, ordering, thread-safety) — but for this project, owning them *is* the point. |
-| **`blinker`** | Small, well-tested, signal-based pub/sub library; very close in shape to Qt's signals, so it transfers conceptually; minimal API surface. | Still "someone else's implementation" — less forced learning than hand-rolling, though a legitimate step up once the concept is solid. |
-| **`asyncio.Queue`-based bus** | If the evdev reader loop is async, a queue-based bus gives natural backpressure and pairs cleanly with `asyncio.create_task` consumers (processing layer, uinput writer, GUI bridge). | Requires the GUI to either run on the same event loop (e.g. via `qasync` for PySide6) or bridge across threads — real complexity, but exactly the kind of trade-off point 2 of the Learning Mandate should surface. |
-
-Recommendation: **start with a hand-rolled synchronous bus** to nail the
-concept, then evaluate migrating to an `asyncio.Queue`-based version once
-the evdev reader is implemented with non-blocking reads — that migration
-*is* the threading-vs-asyncio lesson, not a preamble to it.
+We are going to use pyqt5 sockets
